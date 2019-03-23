@@ -1,20 +1,40 @@
-import urllib.request, os, shutil, zipfile
+import urllib.request, os, shutil, zipfile, json
 from urllib.parse import urlparse
 
 #Creat directory
 def create_dir(dir_path):
-	#stub
-	os.makedirs(dir_path)
+	os.makedirs(dir_path, 777, True)
 
-#Create parent dirs if needed
-def create_parent_dirs(dir_path):
-	os.makedirs(dir_path + "/../../", 777, True)
+def unzip_file(file_path, name=None):
+	z_file = zipfile.ZipFile(file_path, 'r')
 
-def unzip_file(path, name=None):
-	print(path)
-	z_file = zipfile.ZipFile(path)
-	print(z_file)
-	z_file.extractall()
+	#get the name of the output dir from upzip
+	output = os.path.join(os.path.dirname(file_path), z_file.namelist()[0])
+	#unzip
+	z_file.extractall(os.path.dirname(file_path))
+	z_file.close()
+	#Delete the zip
+	os.remove(file_path)
+	#name the directory and return
+	return rename_dir(output, os.path.join(os.path.dirname(file_path), name))
+
+def update_json_value(key, new_val):
+	return None
+
+def read_json_file(file_path) :
+	json_file = open(file_path, "r") # Open the JSON file for reading
+	data = json.load(json_file) # Read the JSON into the buffer
+	json_file.close() # Close the JSON file
+	return data
+
+def save_json_file(file_path, new_json):
+	json_file = open(file_path, "w+")
+	json_file.write(json.dumps(new_json))
+	json_file.close()
+
+def rename_dir(src, dst):
+	os.rename(src, dst)
+	return dst
 
 def download_file(name, url, save_to):
 	#determine filetype of download

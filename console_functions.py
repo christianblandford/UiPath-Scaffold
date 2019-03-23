@@ -9,9 +9,9 @@ t_width = shutil.get_terminal_size((80, 20)).columns #Get terminal width
 #Define default colors
 default_text_color = "white" # set default text color for normal text
 default_important_color = "blue" # set default color for 'important' text, like headers
-default_special_color = "green" # set default color for 'special' text like variable names and whatnot
-default_input_color = "yellow" # set default color for printing string before user input
-default_warn_color = "orange" # set default color for warning messages
+default_special_color = "cyan" # set default color for 'special' text like variable names and whatnot
+default_input_color = "green" # set default color for printing string before user input
+default_warn_color = "yellow" # set default color for warning messages
 default_error_color = "red" # set default color for error messages
 
 default_input_prepend = "   " # add a number of spaces/text/whatever before input
@@ -40,9 +40,14 @@ def warn (text) :
 def error (text) :
 	log(text, default_error_color)
 
-#Prints an error message
+#Prints an special message
 def special (text) :
 	log(text, default_special_color)
+
+#Prints an important message
+def important (text) :
+	log(text, default_important_color)
+
 
 #Prints a string normally then colors the variable passed in
 def variable (text, variable) :
@@ -89,7 +94,7 @@ def input_list(text, values, multi=False, allow_empty=False, color=None):
 #                       text
 #---------------------------------------------------
 
-def header (text, color) :
+def header (text, color=None) :
 	#set color to white if not defined
 	if color is None : color = default_important_color
 	log("", color, "center", "-")

@@ -1,6 +1,7 @@
 #Import statements
-import sys, os, time #import libraries
+import sys, os, time, subprocess #import libraries
 import console_functions as console, text_functions as text, uipath_libraries as frameworks, functions #import modules in this project
+from pathlib import Path
 
 #Set up constants
 path = os.getcwd()
@@ -23,28 +24,48 @@ console.variable("Project description set to: ", p_desc)
 
 #Get directory
 dir_path = console.input("Please enter a path to create your project in: ", os.path.join(default_project_dir, p_name))
-
+parent_dir = Path(dir_path).parent
 
 #Check if parent dir exists. Error and exit if it does not
-if not os.path.isdir(dir_path + "/../../") :
+if not os.path.isdir(parent_dir) :
 	console.warn("Parent directory does not exist.")
-	create_dirs = console.input("Would you like to create the directories now?", "Yes")
-	if create_dirs != "Yes":
+	create_dirs = console.input("Would you like to create the directories now?", "Y")
+	if create_dirs != "Y":
 		console.error("Parent directory does not exist. Please double check and try again.")
 		exit(1)
-else:
-	console.variable("Creating directory:", dir_path)
-	functions.create_parent_dirs(dir_path)
 
-	#^^^^^^LOGIC ABOVE NOT WORKING^^^^^^^^^
+#Create directories
+console.variable("Creating parent directory: ", parent_dir)
+functions.create_dir(parent_dir)
 
 #Select the framework to use
 time.sleep(1) # Sleep one second so user can see output of above input
 framework = frameworks.at_index(console.input_list("Select the framework you would like to use: ", frameworks.get_names()))
-console.special(framework.name)
+console.variable("Using: ", framework.name)
+console.variable("Downloading framework from: ", framework.url)
 
-zip_file = functions.download_file(p_name, framework.url, dir_path)
-functions.unzip_file(os.path.join(zip_file))
+#Download framework .zip
+zip_file = functions.download_file(p_name, framework.url, parent_dir)
+#unzipping file
+console.variable("Unpacking file: ", zip_file)
+new_file = functions.unzip_file(zip_file, p_name)
+console.header("Project " + p_name + " successfully created at " + new_file + "!", 'green')
 
-console.log(framework.url)
+console.log("Updating project.json with project information.")
+p_json_path = os.path.join(new_file, "project.json") # save path to project.json
+p_json = functions.read_json_file(p_json_path) # read JSON file
+p_json["name"] = p_name 
+p_json["description"] = p_desc
+functions.save_json_file(p_json_path, p_json) # save JSON file
+console.log("Done.");
 
+#ask if user wants to scaffold out sequences
+scaffold_project = console.input("Would you like to scaffold out project directories and sequences?", "Y")
+if scaffold_project is not "Y":
+	console.log("Okay, you can always return to this step later. Opening project in Explorer.")
+	time.sleep(2)
+	subprocess.call("explorer " + dir_path, shell=True)
+	exit(0)
+else:
+	console.log("Okay, I will scaffold out a project for you.")
+	exit(0)
