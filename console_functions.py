@@ -14,7 +14,8 @@ default_input_color = "green" # set default color for printing string before use
 default_warn_color = "yellow" # set default color for warning messages
 default_error_color = "red" # set default color for error messages
 
-default_input_prepend = "   " # add a number of spaces/text/whatever before input
+default_input_prepend = "*" # add a number of spaces/text/whatever before input
+default_variable_prepend = "   " #add text before .variable(":dasdasd", var) prints out
 
 #Prints to the console. Alignment can be center. Fill is a character to fill empty space with
 def log (text, color=None, alignment=None, fill_char=None) :
@@ -51,7 +52,7 @@ def important (text) :
 
 #Prints a string normally then colors the variable passed in
 def variable (text, variable) :
-	cprint(text, "white", end="")
+	cprint(default_variable_prepend + text, "white", end="")
 	cprint(variable, default_special_color)
 
 #Prints a prompt for an input

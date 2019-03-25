@@ -33,6 +33,12 @@ def save_json_file(file_path, new_json):
 	json_file.write(json.dumps(new_json))
 	json_file.close()
 
+def read_xaml_file(file_path):
+	#STUB
+	# The URL below should have some good information about this.
+	# https://docs.microsoft.com/en-us/dotnet/framework/windows-workflow-foundation/serializing-workflows-and-activities-to-and-from-xaml
+	return ""
+
 def rename_dir(src, dst):
 	os.rename(src, dst)
 	return dst

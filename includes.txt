@@ -3,3 +3,4 @@
 pip install termcolor
 pip install pick
 pip install windows-curses
+pip install xlrd
