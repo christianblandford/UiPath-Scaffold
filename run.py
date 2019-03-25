@@ -6,4 +6,4 @@ if sys.argv[1].lower() == "start" or sys.argv[1].lower() == "new" or sys.argv[1]
 
 #Create new sequence
 if sys.argv[1].lower() == "sequence":
-	os.system('python scaffold.py') # replace this with logic to create a new sequence
+	os.system('python scaffold-sequence.py')

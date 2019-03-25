@@ -1,4 +1,5 @@
 import urllib.request, os, shutil, zipfile, json
+from os.path import isfile
 from urllib.parse import urlparse
 
 #Creat directory
@@ -48,3 +49,13 @@ def download_file(name, url, save_to):
 	with urllib.request.urlopen(url) as response, open(file_path, 'wb') as out_file:
 		shutil.copyfileobj(response, out_file)
 		return file_path
+
+def print_dirs(dir_path) :
+	for item in os.listdir(dir_path):
+    # print path to all subdirectories first.
+		if not item in [".screenshots", "Data", "Documentation", "Exceptions_Screenshots"] and not os.path.isfile(item):
+			print(" - " + item)
+
+		    # print path to all filenames.
+			#for filename in filenames:
+			#	print(os.path.join(subdirname, filename))
