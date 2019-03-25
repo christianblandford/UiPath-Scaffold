@@ -6,6 +6,6 @@ Adds sequences as needed.
 
 # Usage
 * python run.py start or python run.py project
- * Scaffolds a new project and downloads the framework
+  * Scaffolds a new project and downloads the framework
 * python run.py sequence
- * Creates a new sequence
+  * Creates a new sequence
