@@ -95,9 +95,23 @@ def input_list(text, values, multi=False, allow_empty=False, color=None):
 #                       text
 #---------------------------------------------------
 
-def header (text, color=None) :
-	#set color to white if not defined
-	if color is None : color = default_important_color
-	log("", color, "center", "-")
-	log(text, color, "center", "")
-	log("", color, "center", "-")
+def header (text, text_color=None, accent_color=None, accent_char=None) :
+	if accent_char is None:
+		accent_char = "-"
+
+	#set colors to default if not defined
+	if text_color is None : color = default_important_color
+	if accent_color is None : accent_color = default_important_color
+
+	#Log row of accent chars
+	log("", accent_color, "center", accent_char)
+	
+	#If text is a list, print each line
+	if isinstance(text, list):
+		for row in text:
+			log(row, text_color, "center", "")
+	else:
+		log(text, text_color, "center", "")
+
+	#Log row of accent chars
+	log("", accent_color, "center", accent_char)

@@ -1,6 +1,0 @@
-# A file containing Pip libraries we had to install to make this work
-
-pip install termcolor
-pip install pick
-pip install windows-curses
-pip install xlrd
