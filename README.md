@@ -8,6 +8,6 @@ Adds sequences as needed.
 * pip install uipath_scaffold
 
 # Usage
-* python uipath_scaffold
+* python -m uipath_scaffold
   * Scaffolds a new project after allowing you to choose the generator you would like.
   * *Note:* you must install a generator before this program will do anything
