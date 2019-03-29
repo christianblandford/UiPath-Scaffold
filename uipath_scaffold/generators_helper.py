@@ -6,7 +6,7 @@ class generators_helper:
 	def find_all(cls):
 		to_return = []
 		for p in iter_modules():
-			if "uipath" in p.name and "generator" in p.name:
+			if "uipath" in p.name and "generator" in p.name and p.name != "uipath_scaffold_generator":
 				to_return.append(p.name)
 		return to_return
 
