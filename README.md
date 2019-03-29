@@ -4,6 +4,8 @@ Scaffolds out UiPath projects using one of the selected Frameworks.
 Generates project.json with project name and description. 
 Adds sequences as needed.
 
+![Screenshot of program](https://raw.githubusercontent.com/christianblandford/UiPath-Scaffold/master/screenshot.png)
+
 # Installation:
 * pip install uipath_scaffold
 
