@@ -2,7 +2,8 @@ from pkgutil import iter_modules
 
 class generators_helper:
 	#find all generators
-	def find_all():
+	@classmethod
+	def find_all(cls):
 		to_return = []
 		for p in iter_modules():
 			if "uipath" in p.name and "-generator" in p.name:
