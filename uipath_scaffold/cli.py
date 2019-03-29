@@ -22,4 +22,5 @@ else:
 	terminal.special(generator)
 
 	#Run the generator
-	subprocess.run(generator)
+	os.system("python -m " + generator)
+
