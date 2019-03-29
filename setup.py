@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="uipath_scaffold",
-    version="0.0.1",
+    version="0.0.3",
     author="Christian Blandford",
     author_email="christianblandford@me.com",
     description="CLI tool for running UiPath Scaffold Generators.",
