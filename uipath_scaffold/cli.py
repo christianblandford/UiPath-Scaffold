@@ -1,4 +1,5 @@
 import os
+import subprocess
 import console_functions as terminal
 from .generators_helper import *
 
@@ -21,4 +22,4 @@ else:
 	terminal.special(generator)
 
 	#Run the generator
-	os.system(generator)
+	subprocess.run(generator)
